@@ -3,6 +3,8 @@ name: Public Preview
 on:
   push:
     branches: ["rebuild/memory-space-full"]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:

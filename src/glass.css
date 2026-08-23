@@ -1,0 +1,150 @@
+/* Subtle glass layer for V2 Daily OS. Keeps the original cream + ink visual language. */
+:root{
+  --glass-bg:rgba(255,255,255,.70);
+  --glass-bg-strong:rgba(255,255,255,.82);
+  --glass-line:rgba(23,23,23,.72);
+  --glass-soft:rgba(255,255,255,.42);
+  --glass-shadow:0 14px 34px rgba(31,41,55,.08);
+}
+
+body{
+  background:
+    radial-gradient(circle at 10% 12%,rgba(255,107,157,.16),transparent 30%),
+    radial-gradient(circle at 92% 14%,rgba(255,209,102,.18),transparent 28%),
+    radial-gradient(circle at 72% 88%,rgba(124,58,237,.08),transparent 26%),
+    #f7f3e9;
+}
+
+.app{
+  position:relative;
+  isolation:isolate;
+  background:transparent;
+}
+
+.app::before,.app::after{
+  content:"";
+  position:fixed;
+  z-index:-1;
+  pointer-events:none;
+  border-radius:999px;
+  filter:blur(14px);
+  opacity:.52;
+}
+.app::before{width:240px;height:240px;left:18%;top:11%;background:rgba(255,107,157,.13)}
+.app::after{width:300px;height:300px;right:4%;bottom:3%;background:rgba(255,209,102,.14)}
+
+.topbar{
+  background:linear-gradient(90deg,rgba(255,107,157,.92) 0%,rgba(255,140,66,.91) 52%,rgba(255,209,102,.91) 100%);
+  backdrop-filter:blur(18px) saturate(125%);
+  -webkit-backdrop-filter:blur(18px) saturate(125%);
+  box-shadow:0 10px 28px rgba(23,23,23,.07);
+}
+
+.sidebar{
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(18px) saturate(125%);
+  -webkit-backdrop-filter:blur(18px) saturate(125%);
+  box-shadow:12px 0 30px rgba(31,41,55,.04);
+}
+
+.profileBox{background:rgba(255,255,255,.30)}
+.navItem{transition:background .16s ease,transform .16s ease,box-shadow .16s ease}
+.navItem:hover{background:rgba(255,255,255,.62);transform:translateX(2px)}
+.navItem.active{background:rgba(23,23,23,.92);box-shadow:0 8px 20px rgba(23,23,23,.13)}
+
+.card,.stat,.memoryItem,.leadCard{
+  background:var(--glass-bg);
+  backdrop-filter:blur(16px) saturate(118%);
+  -webkit-backdrop-filter:blur(16px) saturate(118%);
+  box-shadow:4px 4px 0 rgba(23,23,23,.10),var(--glass-shadow);
+}
+.card{border-color:var(--glass-line)}
+.card:hover{box-shadow:5px 5px 0 rgba(23,23,23,.11),0 18px 40px rgba(31,41,55,.09)}
+.cardHead{position:relative;overflow:hidden}
+.cardHead::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,rgba(255,255,255,.19),transparent 38%,rgba(255,255,255,.08));
+  pointer-events:none;
+}
+.cardHead strong{position:relative;z-index:1}
+
+.eventRow,.focusRow,.todoRow,.routineRow,.targetBox,.cardBody .stat,.infoBox,.idea,.connectionWarning,.settingsList>div{
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+.eventRow,.targetBox,.cardBody .stat{background:rgba(255,255,255,.47)}
+.focusRow,.todoRow,.routineRow{background:rgba(255,255,255,.55)}
+.focusRow:hover,.todoRow:hover,.routineRow:hover{background:rgba(255,255,255,.75)}
+
+.quickAdd input,.searchBox input,.memoryCreate input,.searchBox.large{
+  background:rgba(255,255,255,.54);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+.filterBar{background:rgba(255,255,255,.32);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.filterBar button.active{background:rgba(255,255,255,.82)}
+.stageBody{background:rgba(255,255,255,.16)}
+.chips span{background:rgba(23,23,23,.07)}
+.btn.light{background:rgba(255,255,255,.70);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+
+/* Daily pulse sits inside the existing Home module; it is not a new module. */
+.dailyPulse{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin:-6px 0 16px;
+}
+.dailyPulseCard{
+  min-width:0;
+  padding:11px 12px;
+  border:1.5px solid rgba(23,23,23,.58);
+  border-radius:14px;
+  background:rgba(255,255,255,.52);
+  backdrop-filter:blur(14px) saturate(120%);
+  -webkit-backdrop-filter:blur(14px) saturate(120%);
+  box-shadow:2px 2px 0 rgba(23,23,23,.07),0 10px 24px rgba(31,41,55,.05);
+}
+.dailyPulseCard span{
+  display:block;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  color:rgba(23,23,23,.54);
+}
+.dailyPulseCard strong{
+  display:block;
+  margin-top:4px;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:17px;
+  line-height:1.05;
+  font-weight:800;
+}
+.dailyPulseCard small{display:block;margin-top:3px;font-size:8px;color:rgba(23,23,23,.45);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.habitHistory{display:flex;flex-direction:column;gap:10px}
+.habitHistoryRow{display:grid;grid-template-columns:92px 1fr;gap:8px;align-items:center}
+.habitHistoryRow>span{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:800;text-transform:uppercase}
+.habitHistoryDots{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.habitHistoryDots i{height:22px;border-radius:7px;background:rgba(23,23,23,.07);border:1px solid rgba(23,23,23,.05);display:grid;place-items:center;font-style:normal;font-family:'Space Grotesk',sans-serif;font-size:7px;font-weight:800;color:rgba(23,23,23,.38)}
+.habitHistoryDots i.hit{background:rgba(124,58,237,.18);border-color:rgba(124,58,237,.30);color:#6d28d9}
+.habitHistoryDots i.today{outline:1.5px solid rgba(23,23,23,.48);outline-offset:1px}
+
+.overdueText{color:#dc2626!important;font-weight:700}
+.systemHealth{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin-top:12px;
+}
+.systemHealth>div{padding:10px;border:1px solid rgba(23,23,23,.10);border-radius:11px;background:rgba(255,255,255,.44)}
+.systemHealth span{display:block;font-family:'Space Grotesk',sans-serif;font-size:8px;text-transform:uppercase;font-weight:800;color:rgba(23,23,23,.48)}
+.systemHealth strong{display:block;margin-top:3px;font-family:'Space Grotesk',sans-serif;font-size:12px}
+
+@media(max-width:900px){.dailyPulse{grid-template-columns:repeat(2,minmax(0,1fr))}.systemHealth{grid-template-columns:1fr}}
+@media(max-width:560px){.dailyPulse{grid-template-columns:1fr 1fr;gap:8px}.dailyPulseCard{padding:9px 10px}.dailyPulseCard strong{font-size:15px}.sidebar{background:rgba(255,255,255,.88)}}
+
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.app::before,.app::after{display:none}}

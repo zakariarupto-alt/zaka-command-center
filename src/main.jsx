@@ -10,9 +10,11 @@ import './memory-space.css'
 import './memory-space-v2.css'
 import './home-dashboard.css'
 
+const routerBase=(import.meta.env.BASE_URL||'/').replace(/\/$/,'')||'/'
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={routerBase}>
       <App />
       <HomeDashboard />
       <MemorySpaceArchive />
@@ -30,7 +32,8 @@ const applyMemorySpaceIdentity = () => {
   if (brandSubtitle && brandSubtitle.textContent !== 'Personal Life & Business OS') brandSubtitle.textContent = 'Personal Life & Business OS'
 
   const pageTitle = document.querySelector('.pageTitle h2')
-  if (window.location.pathname === '/' && pageTitle?.textContent === 'Command Center') {
+  const localPath=window.location.pathname.replace(routerBase==='/'?'':routerBase,'')||'/'
+  if (localPath === '/' && pageTitle?.textContent === 'Command Center') {
     pageTitle.textContent = 'Memory Space'
   }
 }

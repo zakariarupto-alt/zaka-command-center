@@ -19,11 +19,23 @@ if (scriptMatch) {
   html = html.replace(scriptMatch[0], () => `<script type="module">\n${js}\n</script>`)
 }
 
+const iconMatch = html.match(/<link[^>]+rel=["']icon["'][^>]+href=["']([^"']+)["'][^>]*>/i)
+if (iconMatch) {
+  const iconFile = path.join(dist, iconMatch[1].replace(/^\//, ''))
+  if (fs.existsSync(iconFile)) {
+    const svg = fs.readFileSync(iconFile, 'utf8')
+    const data = `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`
+    html = html.replace(iconMatch[0], () => iconMatch[0].replace(iconMatch[1], data))
+  }
+}
+
 html = html.replace(/<link[^>]+rel=["']modulepreload["'][^>]*>/gi, '')
-html = html.replace('</head>', '<meta name="robots" content="noindex,nofollow" />\n</head>')
 
 if (/\/assets\//.test(html)) {
   throw new Error('Standalone preview still contains unresolved /assets/ references')
+}
+if (/href=["']\/favicon\.svg["']/.test(html)) {
+  throw new Error('Standalone preview still contains unresolved favicon reference')
 }
 
 fs.writeFileSync(path.join(dist, 'memory-space-preview.html'), html)

@@ -3,15 +3,18 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import MemorySpaceArchive from './MemorySpaceArchive.jsx'
+import HomeDashboard from './HomeDashboard.jsx'
 import './styles.css'
 import './glass.css'
 import './memory-space.css'
 import './memory-space-v2.css'
+import './home-dashboard.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
+      <HomeDashboard />
       <MemorySpaceArchive />
     </BrowserRouter>
   </React.StrictMode>,

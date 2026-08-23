@@ -6,6 +6,7 @@ import MemorySpaceArchive from './MemorySpaceArchive.jsx'
 import './styles.css'
 import './glass.css'
 import './memory-space.css'
+import './memory-space-v2.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

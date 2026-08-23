@@ -6,6 +6,7 @@ import GlobalCommand from './GlobalCommand.jsx'
 import './styles.css'
 import './polish.css'
 import './command.css'
+import './advanced.css'
 
 const basename=(import.meta.env.BASE_URL||'/').replace(/\/$/,'')||'/'
 

@@ -12,3 +12,22 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </BrowserRouter>
   </React.StrictMode>,
 )
+
+// Temporary product identity while the underlying modules continue to evolve.
+// Keeping this at the shell layer lets us rename the workspace without
+// changing the existing module architecture or stored user data.
+const applyMemorySpaceIdentity = () => {
+  const brandTitle = document.querySelector('.brand h1')
+  const brandSubtitle = document.querySelector('.brand p')
+  if (brandTitle && brandTitle.textContent !== 'Memory Space') brandTitle.textContent = 'Memory Space'
+  if (brandSubtitle && brandSubtitle.textContent !== 'Personal Life & Business OS') brandSubtitle.textContent = 'Personal Life & Business OS'
+
+  const pageTitle = document.querySelector('.pageTitle h2')
+  if (window.location.pathname === '/' && pageTitle?.textContent === 'Command Center') {
+    pageTitle.textContent = 'Memory Space'
+  }
+}
+
+applyMemorySpaceIdentity()
+const identityObserver = new MutationObserver(applyMemorySpaceIdentity)
+identityObserver.observe(document.getElementById('root'), { childList: true, subtree: true })

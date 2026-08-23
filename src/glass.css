@@ -1,0 +1,183 @@
+/* MEMORY SPACE — premium glass layer over the original warm cream + ink system */
+:root{
+  --ms-ink:#171717;
+  --ms-cream:#f7f3e9;
+  --ms-glass:rgba(255,255,255,.68);
+  --ms-glass-strong:rgba(255,255,255,.84);
+  --ms-line:rgba(23,23,23,.66);
+  --ms-soft-line:rgba(23,23,23,.10);
+  --ms-shadow:0 18px 46px rgba(38,31,27,.08);
+  --ms-shadow-soft:0 8px 24px rgba(38,31,27,.055);
+}
+
+html{background:var(--ms-cream)}
+body{
+  background:
+    radial-gradient(circle at 8% 9%,rgba(255,107,157,.16),transparent 28%),
+    radial-gradient(circle at 92% 10%,rgba(255,209,102,.20),transparent 27%),
+    radial-gradient(circle at 73% 86%,rgba(124,58,237,.085),transparent 27%),
+    linear-gradient(145deg,#fbf8f0 0%,#f6f1e6 48%,#faf6ed 100%);
+  background-attachment:fixed;
+}
+
+.app{position:relative;isolation:isolate;background:transparent}
+.app::before,.app::after{
+  content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:999px;
+  filter:blur(24px);opacity:.52;
+}
+.app::before{width:290px;height:290px;left:14%;top:10%;background:rgba(255,107,157,.13)}
+.app::after{width:330px;height:330px;right:3%;bottom:2%;background:rgba(255,209,102,.16)}
+
+/* Brand refresh without changing the existing application structure */
+.brand>div:last-child h1{font-size:0;line-height:1}
+.brand>div:last-child h1::after{
+  content:"MEMORY SPACE";
+  font-family:'Space Grotesk',sans-serif;
+  font-size:15px;line-height:1;font-weight:800;letter-spacing:-.025em;
+}
+.brand>div:last-child p{font-size:0;margin-top:5px}
+.brand>div:last-child p::after{
+  content:"PERSONAL LIFE & BUSINESS OS";
+  font-family:'Space Grotesk',sans-serif;
+  font-size:8px;line-height:1;font-weight:700;letter-spacing:.15em;opacity:.62;
+}
+.brandIcon{
+  background:rgba(23,23,23,.94)!important;
+  box-shadow:0 8px 18px rgba(23,23,23,.18),inset 0 0 0 1px rgba(255,255,255,.08)!important;
+}
+
+.topbar{
+  background:linear-gradient(90deg,rgba(255,107,157,.93) 0%,rgba(255,140,66,.91) 52%,rgba(255,209,102,.92) 100%);
+  backdrop-filter:blur(22px) saturate(132%);
+  -webkit-backdrop-filter:blur(22px) saturate(132%);
+  box-shadow:0 12px 34px rgba(23,23,23,.08);
+  border-bottom-color:rgba(23,23,23,.82)!important;
+}
+.timePill{box-shadow:0 6px 15px rgba(23,23,23,.16);letter-spacing:.02em}
+.headerRight svg{opacity:.75}
+
+.sidebar{
+  background:rgba(255,255,255,.70);
+  backdrop-filter:blur(24px) saturate(130%);
+  -webkit-backdrop-filter:blur(24px) saturate(130%);
+  box-shadow:14px 0 38px rgba(31,41,55,.045);
+  border-right-color:rgba(23,23,23,.78)!important;
+}
+.sideLabel{opacity:.42!important}
+.profileBox{background:rgba(255,255,255,.31);border-top-color:rgba(23,23,23,.75)!important}
+.profileBox em{letter-spacing:.16em!important;opacity:.38!important}
+.avatar{box-shadow:0 6px 16px rgba(255,107,157,.18)}
+.navItem{
+  transition:background .16s ease,transform .16s ease,box-shadow .16s ease;
+  border:1px solid transparent;
+}
+.navItem:hover{background:rgba(255,255,255,.72);transform:translateX(2px);border-color:rgba(23,23,23,.06)}
+.navItem.active{
+  background:rgba(23,23,23,.94);
+  box-shadow:0 9px 22px rgba(23,23,23,.15);
+  border-color:rgba(23,23,23,.90);
+}
+
+.content{padding-top:24px!important}
+.pageTitle{margin-bottom:18px!important}
+.pageTitle h2{letter-spacing:-.045em!important}
+.pageTitle p{color:rgba(23,23,23,.58)!important}
+
+.card,.stat,.memoryItem,.leadCard{
+  background:var(--ms-glass);
+  backdrop-filter:blur(18px) saturate(123%);
+  -webkit-backdrop-filter:blur(18px) saturate(123%);
+  box-shadow:4px 4px 0 rgba(23,23,23,.085),var(--ms-shadow);
+}
+.card{
+  border-color:var(--ms-line)!important;
+  border-radius:17px!important;
+  transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;
+}
+.card:hover{transform:translateY(-1px);box-shadow:5px 5px 0 rgba(23,23,23,.09),0 21px 50px rgba(31,41,55,.09)}
+.cardHead{position:relative;overflow:hidden;min-height:42px!important}
+.cardHead::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(110deg,rgba(255,255,255,.23),transparent 36%,rgba(255,255,255,.07));
+  pointer-events:none;
+}
+.cardHead::after{
+  content:"";position:absolute;left:12px;right:12px;bottom:0;height:1px;
+  background:rgba(255,255,255,.20);pointer-events:none;
+}
+.cardHead strong{position:relative;z-index:1;letter-spacing:.13em!important}
+.cardBody{position:relative}
+
+.eventRow,.focusRow,.todoRow,.routineRow,.targetBox,.cardBody .stat,.infoBox,.idea,.connectionWarning,.settingsList>div{
+  backdrop-filter:blur(11px);-webkit-backdrop-filter:blur(11px);
+}
+.eventRow,.targetBox,.cardBody .stat{background:rgba(255,255,255,.48)!important}
+.focusRow,.todoRow,.routineRow{background:rgba(255,255,255,.57)!important;transition:.15s ease}
+.focusRow:hover,.todoRow:hover,.routineRow:hover{background:rgba(255,255,255,.80)!important;transform:translateY(-1px)}
+.focusRow.done,.todoRow.done,.routineRow.done{background:rgba(23,23,23,.045)!important}
+
+.quickAdd input,.searchBox input,.memoryCreate input,.searchBox.large{
+  background:rgba(255,255,255,.58)!important;
+  backdrop-filter:blur(11px);-webkit-backdrop-filter:blur(11px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.70);
+}
+.quickAdd input:focus,.searchBox input:focus,.memoryCreate input:focus{
+  background:rgba(255,255,255,.80)!important;
+  box-shadow:0 0 0 3px rgba(255,140,66,.10);
+}
+.filterBar{background:rgba(255,255,255,.34)!important;backdrop-filter:blur(11px);-webkit-backdrop-filter:blur(11px)}
+.filterBar button.active{background:rgba(255,255,255,.88)!important}
+.stageBody{background:rgba(255,255,255,.18)!important}
+.leadCard{border-color:rgba(23,23,23,.18)!important}
+.chips span{background:rgba(23,23,23,.065)!important}
+.btn.light{background:rgba(255,255,255,.74)!important;backdrop-filter:blur(11px);-webkit-backdrop-filter:blur(11px)}
+.btn{transition:transform .14s ease,box-shadow .14s ease}
+.btn:hover{transform:translateY(-2px)!important}
+
+/* Daily Pulse */
+.dailyPulse{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin:-4px 0 17px}
+.dailyPulseCard{
+  min-width:0;padding:12px 13px;border:1.5px solid rgba(23,23,23,.52);border-radius:15px;
+  background:rgba(255,255,255,.54);backdrop-filter:blur(16px) saturate(124%);
+  -webkit-backdrop-filter:blur(16px) saturate(124%);
+  box-shadow:2px 2px 0 rgba(23,23,23,.06),0 12px 28px rgba(31,41,55,.055);
+  position:relative;overflow:hidden;
+}
+.dailyPulseCard::after{content:"";position:absolute;inset:0 0 auto;height:1px;background:rgba(255,255,255,.72)}
+.dailyPulseCard span{display:block;font-family:'Space Grotesk',sans-serif;font-size:8px;font-weight:800;letter-spacing:.105em;text-transform:uppercase;color:rgba(23,23,23,.50)}
+.dailyPulseCard strong{display:block;margin-top:5px;font-family:'Space Grotesk',sans-serif;font-size:18px;line-height:1.05;font-weight:800;letter-spacing:-.035em}
+.dailyPulseCard small{display:block;margin-top:4px;font-size:8px;color:rgba(23,23,23,.46);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.habitHistory{display:flex;flex-direction:column;gap:11px}
+.habitHistoryRow{display:grid;grid-template-columns:92px 1fr;gap:8px;align-items:center}
+.habitHistoryRow>span{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:800;text-transform:uppercase}
+.habitHistoryDots{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.habitHistoryDots i{height:23px;border-radius:8px;background:rgba(23,23,23,.06);border:1px solid rgba(23,23,23,.05);display:grid;place-items:center;font-style:normal;font-family:'Space Grotesk',sans-serif;font-size:7px;font-weight:800;color:rgba(23,23,23,.37)}
+.habitHistoryDots i.hit{background:linear-gradient(145deg,rgba(124,58,237,.18),rgba(255,107,157,.10));border-color:rgba(124,58,237,.27);color:#6d28d9}
+.habitHistoryDots i.today{outline:1.5px solid rgba(23,23,23,.46);outline-offset:1px}
+
+.overdueText{color:#dc2626!important;font-weight:700}
+.systemHealth{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+.systemHealth>div{padding:11px;border:1px solid rgba(23,23,23,.09);border-radius:12px;background:rgba(255,255,255,.46);box-shadow:inset 0 1px 0 rgba(255,255,255,.65)}
+.systemHealth span{display:block;font-family:'Space Grotesk',sans-serif;font-size:8px;text-transform:uppercase;font-weight:800;color:rgba(23,23,23,.46)}
+.systemHealth strong{display:block;margin-top:4px;font-family:'Space Grotesk',sans-serif;font-size:12px}
+
+@media(max-width:1100px){.content{padding-top:20px!important}}
+@media(max-width:900px){.dailyPulse{grid-template-columns:repeat(2,minmax(0,1fr))}.systemHealth{grid-template-columns:1fr}.card:hover{transform:none}}
+@media(max-width:800px){
+  .brand>div:last-child h1::after{font-size:12px}
+  .brand>div:last-child p::after{font-size:7px;letter-spacing:.12em}
+  .content{padding-top:16px!important}
+  .sidebar{background:rgba(255,255,255,.90)}
+}
+@media(max-width:560px){
+  .dailyPulse{grid-template-columns:1fr 1fr;gap:8px}
+  .dailyPulseCard{padding:10px 10px;border-radius:13px}
+  .dailyPulseCard strong{font-size:15px}
+  .card{border-radius:15px!important}
+  .pageTitle{margin-bottom:14px!important}
+  .brand>div:last-child p::after{content:"LIFE & BUSINESS OS"}
+}
+@media(max-width:380px){.dailyPulse{grid-template-columns:1fr}}
+
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.app::before,.app::after{display:none}}

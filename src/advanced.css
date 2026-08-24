@@ -1,0 +1,216 @@
+/* MEMORY SPACE — Advanced Mode design system
+   Non-destructive presentation layer: upgrades every module without touching data logic. */
+:root{
+  --adv-ink:#151515;
+  --adv-paper:#f7f2e8;
+  --adv-card:rgba(255,255,255,.76);
+  --adv-card-strong:rgba(255,255,255,.9);
+  --adv-line:rgba(21,21,21,.18);
+  --adv-line-strong:rgba(21,21,21,.46);
+  --adv-shadow:0 22px 65px rgba(43,32,26,.08);
+  --adv-shadow-soft:0 12px 34px rgba(43,32,26,.055);
+  --adv-purple:#7757ff;
+  --adv-pink:#ff6695;
+  --adv-orange:#ff9148;
+  --adv-gold:#f1be55;
+  --adv-green:#0b9b69;
+  --adv-red:#d84b4b;
+  --adv-blue:#3478f6;
+  --adv-cyan:#0d9fb2;
+}
+
+/* ---------- App shell ---------- */
+body{
+  background:
+    radial-gradient(circle at 10% 4%,rgba(255,102,149,.16),transparent 27%),
+    radial-gradient(circle at 82% 2%,rgba(241,190,85,.17),transparent 24%),
+    radial-gradient(circle at 91% 70%,rgba(119,87,255,.08),transparent 25%),
+    linear-gradient(140deg,#fbf7ef 0%,#f4ecdf 52%,#faf6ee 100%);
+}
+body:after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.24;
+  background-image:linear-gradient(rgba(21,21,21,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(21,21,21,.018) 1px,transparent 1px);
+  background-size:42px 42px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.35),transparent 72%);
+}
+
+.topbar{
+  height:66px;
+  padding:0 20px;
+  border-bottom:1px solid rgba(21,21,21,.38);
+  background:linear-gradient(100deg,rgba(255,103,150,.93),rgba(255,145,72,.91) 51%,rgba(246,194,87,.92));
+  box-shadow:0 14px 36px rgba(54,34,29,.11),inset 0 1px rgba(255,255,255,.36);
+}
+.brandIcon{width:38px;height:38px;border-radius:12px;box-shadow:0 10px 23px rgba(21,21,21,.2)}
+.brand h1{font-size:16px;letter-spacing:-.035em}.brand p{font-size:7.5px;opacity:.68}
+.topDate{padding:7px 12px;border:1px solid rgba(21,21,21,.16);background:rgba(255,255,255,.22);border-radius:999px;backdrop-filter:blur(12px)}
+.topRight>strong{box-shadow:0 8px 18px rgba(21,21,21,.13)}
+.statusDot{box-shadow:0 0 0 4px rgba(11,155,105,.12);animation:advPulse 2.8s ease-in-out infinite}
+@keyframes advPulse{50%{box-shadow:0 0 0 7px rgba(11,155,105,0)}}
+
+.appBody{height:calc(100vh - 66px)}
+.sidebar{
+  width:264px;flex-basis:264px;
+  background:linear-gradient(180deg,rgba(255,255,255,.76),rgba(252,248,241,.6));
+  border-right:1px solid rgba(21,21,21,.28);
+  box-shadow:16px 0 50px rgba(60,46,36,.045);
+}
+.sideLabel{padding:20px 17px 9px;font-size:7px;color:rgba(21,21,21,.48)}
+.sidebar nav{padding:0 12px;gap:4px}
+.navItem{min-height:39px;padding:10px 12px;border-radius:12px;font-size:9.5px;letter-spacing:.06em}
+.navItem:hover{background:rgba(255,255,255,.82);box-shadow:0 7px 20px rgba(44,34,29,.045)}
+.navItem.active{background:linear-gradient(135deg,#171717,#2a2522);box-shadow:0 10px 26px rgba(21,21,21,.18),inset 0 1px rgba(255,255,255,.1)}
+.navItem.active:after{content:"";position:absolute;right:8px;width:5px;height:5px;border-radius:50%;background:linear-gradient(135deg,var(--adv-pink),var(--adv-gold));box-shadow:0 0 0 4px rgba(255,102,149,.1)}
+.profileBox{padding:14px;background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.58));border-top-color:rgba(21,21,21,.26)}
+.profileBox em{padding:6px 8px;border-radius:999px;background:rgba(119,87,255,.07);color:#6245d8;opacity:1;letter-spacing:.13em}
+
+.content{max-width:1680px;padding:28px 30px 54px}
+.pageTitle{position:relative;margin-bottom:22px;padding:2px 0 16px;border-bottom:1px solid rgba(21,21,21,.1)}
+.pageTitle:after{content:"";position:absolute;left:0;bottom:-1px;width:86px;height:2px;border-radius:999px;background:linear-gradient(90deg,var(--adv-purple),var(--adv-pink),var(--adv-orange))}
+.pageEyebrow{color:#6e52dc;font-size:7px;letter-spacing:.18em}
+.pageTitle h2{font-size:30px;letter-spacing:-.055em;text-wrap:balance}
+.pageTitle p{font-size:11px;max-width:800px;color:rgba(21,21,21,.6)}
+
+/* ---------- Universal surfaces ---------- */
+.panel,.stat,.heroCard,.quickCapture,.memoryHero,.memoryToolbar{
+  background:linear-gradient(155deg,rgba(255,255,255,.86),rgba(255,255,255,.6));
+  border:1px solid rgba(21,21,21,.24);
+  box-shadow:inset 0 1px rgba(255,255,255,.7),0 2px 0 rgba(21,21,21,.02),var(--adv-shadow-soft);
+}
+.panel{border-radius:19px;overflow:hidden;position:relative}
+.panel:before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.92),transparent);pointer-events:none}
+.panel:hover{border-color:rgba(21,21,21,.34);box-shadow:inset 0 1px rgba(255,255,255,.8),0 18px 45px rgba(55,40,31,.07)}
+.panelHead{min-height:56px;padding:14px 16px;background:linear-gradient(180deg,rgba(255,255,255,.52),rgba(255,255,255,.08));border-bottom:1px solid rgba(21,21,21,.075)}
+.panelHead>div:first-child>span{font-size:6.5px;letter-spacing:.16em;color:#6f52dd}.panelHead h3{font-size:12.5px;letter-spacing:-.015em}
+.panelBody{padding:16px}
+
+.statsGrid{gap:12px;margin-bottom:16px}.stat{border-radius:16px;padding:14px 15px;min-height:84px;position:relative;overflow:hidden}
+.stat:after{content:"";position:absolute;right:-26px;bottom:-35px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(21,21,21,.055),transparent 68%)}
+.stat>span{font-size:6.5px;letter-spacing:.14em}.stat strong{font-size:23px;letter-spacing:-.045em}.stat small{font-size:8px;margin-top:7px}
+.stat.blue{border-top:0;border-left:3px solid var(--adv-blue)}.stat.red{border-top:0;border-left:3px solid var(--adv-red)}.stat.green{border-top:0;border-left:3px solid var(--adv-green)}.stat.purple{border-top:0;border-left:3px solid var(--adv-purple)}.stat.amber{border-top:0;border-left:3px solid var(--adv-orange)}
+
+.heroCard{border-radius:22px;padding:22px 24px;margin-bottom:14px;min-height:132px;background:linear-gradient(125deg,rgba(255,255,255,.91),rgba(255,242,229,.74) 52%,rgba(239,233,255,.62));box-shadow:var(--adv-shadow)}
+.heroCard:before{content:"ADVANCED WORKSPACE";position:absolute;right:22px;top:16px;font:800 6px/1 'Space Grotesk',sans-serif;letter-spacing:.2em;color:rgba(21,21,21,.27)}
+.heroCard h3{font-size:23px;margin-top:9px}.heroCard p{font-size:10px;max-width:700px}.scoreRing{width:104px;height:104px;flex-basis:104px;border-width:8px;box-shadow:0 12px 32px rgba(119,87,255,.11),inset 0 0 0 6px rgba(255,255,255,.45)}
+.scoreRing strong{font-size:20px}
+
+.quickCapture{border-radius:17px;padding:9px 10px;box-shadow:0 10px 26px rgba(50,37,29,.055)}
+.captureTabs{padding:4px}.captureTabs button{padding:8px 12px}.captureTabs button.active{background:linear-gradient(135deg,#171717,#2b2522);box-shadow:0 6px 14px rgba(21,21,21,.13)}
+.quickCapture>input{font-size:11px}
+
+/* ---------- Inputs & actions ---------- */
+.btn{min-height:36px;padding:9px 15px;border-radius:999px;box-shadow:0 7px 16px rgba(21,21,21,.055)}
+.btn.dark{background:linear-gradient(135deg,#171717,#2d2825)}
+.btn.light{background:rgba(255,255,255,.82)}
+.btn:hover{box-shadow:0 10px 22px rgba(21,21,21,.1)}
+.iconBtn{width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.7)}
+.field>span{font-size:6.5px;color:rgba(21,21,21,.6)}
+.field input,.field select,.field textarea{border-radius:11px;min-height:41px;background:rgba(255,255,255,.86);border-color:rgba(21,21,21,.18);box-shadow:inset 0 1px 2px rgba(21,21,21,.02)}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:rgba(119,87,255,.64);box-shadow:0 0 0 4px rgba(119,87,255,.08),0 10px 20px rgba(119,87,255,.04)}
+.searchBar{border-radius:12px;padding:9px 11px;background:rgba(255,255,255,.72);border:1px solid rgba(21,21,21,.13)}
+.filterBar{gap:6px;padding:5px;border:1px solid rgba(21,21,21,.08);background:rgba(255,255,255,.38);border-radius:999px;width:max-content;max-width:100%}
+.filterBar button,.categoryRow button,.memoryViews button{padding:8px 12px;border-color:transparent;background:transparent}
+.filterBar button.active,.categoryRow button.active,.memoryViews button.active{background:linear-gradient(135deg,#171717,#2c2723);box-shadow:0 7px 15px rgba(21,21,21,.12)}
+
+/* ---------- Home / tasks ---------- */
+.taskRow{min-height:46px;border-radius:12px;background:rgba(255,255,255,.58);border-color:rgba(21,21,21,.11);padding:10px 11px}
+.taskRow:hover{transform:translateX(2px);background:rgba(255,255,255,.92);box-shadow:0 8px 18px rgba(39,30,25,.045)}
+.taskRow.priority-high{border-left:3px solid var(--adv-red)}.taskRow.priority-medium{border-left:3px solid var(--adv-orange)}.taskRow.priority-low{border-left:3px solid var(--adv-green)}
+.taskCheck,.completeBtn{width:19px;height:19px;flex-basis:19px;background:rgba(255,255,255,.75)}
+.taskLayout>.panel:first-child{align-self:start;position:sticky;top:14px}
+.attention{border-radius:12px;padding:11px}.attention.danger{background:linear-gradient(135deg,rgba(255,244,244,.92),rgba(255,236,231,.7));border-color:rgba(216,75,75,.22)}
+.timeline>div{grid-template-columns:54px 9px 1fr;padding:5px 0}.timeline i{box-shadow:0 0 0 5px rgba(119,87,255,.07)}
+.progress{height:8px}.progress span{box-shadow:0 0 14px rgba(255,145,72,.25)}
+.memoryPreviewGrid{gap:10px}.memoryPreviewGrid>button{border-radius:13px;padding:12px;border-color:rgba(21,21,21,.1);background:rgba(255,255,255,.56)}
+
+/* ---------- Calendar ---------- */
+.calendarGrid,.calendarLayout{gap:14px}
+.calendarDay,.calendarCell,.dayCard{background:rgba(255,255,255,.61);border:1px solid rgba(21,21,21,.11);border-radius:13px;transition:.15s}
+.calendarDay:hover,.calendarCell:hover,.dayCard:hover{background:#fff;border-color:rgba(119,87,255,.28);box-shadow:0 9px 20px rgba(60,43,35,.05)}
+.eventItem,.eventRow{border-radius:11px;background:rgba(255,255,255,.65);border:1px solid rgba(21,21,21,.1)}
+
+/* ---------- LifeOS ---------- */
+.routineList{gap:8px}.routineList>div,.routineRow{border-radius:13px;background:rgba(255,255,255,.63);border:1px solid rgba(21,21,21,.11);box-shadow:0 5px 13px rgba(38,29,24,.025)}
+.routineList>div:hover,.routineRow:hover{background:#fff;border-color:rgba(119,87,255,.24)}
+.habitGrid,.historyGrid{gap:8px}.weekDots i,.historyGrid i{border-radius:7px;box-shadow:inset 0 1px rgba(255,255,255,.45)}
+
+/* ---------- Business ---------- */
+.threeCol>.panel{min-height:100%}.threeCol>.panel .targetBox{background:linear-gradient(135deg,rgba(119,87,255,.07),rgba(255,102,149,.045));border:1px solid rgba(119,87,255,.1);border-radius:13px;padding:12px}
+.targetBox strong{font-size:20px;letter-spacing:-.04em}.chips span{padding:5px 9px;background:rgba(21,21,21,.055);border:1px solid rgba(21,21,21,.055)}
+.goalList li{padding:4px 0}.goalList li svg{color:var(--adv-green)}
+
+/* ---------- Warehouse ---------- */
+.tableWrap{border:1px solid rgba(21,21,21,.09);border-radius:14px;background:rgba(255,255,255,.46);box-shadow:inset 0 1px rgba(255,255,255,.5)}
+.tableWrap table{border-collapse:separate;border-spacing:0}.tableWrap thead th{height:38px;background:rgba(248,244,236,.94);font-size:7px;letter-spacing:.11em;border-bottom:1px solid rgba(21,21,21,.11)}
+.tableWrap tbody td{height:48px;border-bottom:1px solid rgba(21,21,21,.065)}
+.tableWrap tbody tr:hover{background:linear-gradient(90deg,rgba(119,87,255,.035),rgba(255,145,72,.025))}
+.stockBtns{border:1px solid rgba(21,21,21,.13);border-radius:999px;padding:2px;background:rgba(255,255,255,.65)}
+.stockBtns button{border-radius:999px}.bad{color:#c43e3e}.good{color:#07865c}
+
+/* ---------- Leads / CRM ---------- */
+.kanban{gap:14px;padding:4px 3px 18px}.stage{width:255px;flex-basis:255px}.stageHead{padding:4px 6px 9px}.stageHead span{font-size:8px;letter-spacing:.08em}.stageHead>b{background:rgba(21,21,21,.08);color:#171717;box-shadow:inset 0 0 0 1px rgba(21,21,21,.05)}
+.stageBody{min-height:250px;padding:8px;border-radius:15px;border-color:rgba(21,21,21,.13);background:linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,.18))}
+.leadCard{border-radius:14px;padding:12px;background:rgba(255,255,255,.84);border-color:rgba(21,21,21,.13);box-shadow:0 8px 22px rgba(42,32,27,.04)}
+.leadCard:hover{transform:translateY(-2px);box-shadow:0 15px 30px rgba(42,32,27,.075)}
+.leadCard select{border-radius:9px;background:#fff;border:1px solid rgba(21,21,21,.15)}
+.convertBtn{border-radius:999px;background:linear-gradient(135deg,rgba(11,155,105,.1),rgba(11,155,105,.04));border:1px solid rgba(11,155,105,.18);color:#087852;font-weight:800}
+.follow.overdue{background:rgba(216,75,75,.08);color:#bd3e3e;border-radius:8px;padding:6px}
+
+/* ---------- Clients ---------- */
+.clientCard,.clientItem{border-radius:15px;background:rgba(255,255,255,.74);border:1px solid rgba(21,21,21,.12)}
+.clientCard:hover,.clientItem:hover{border-color:rgba(52,120,246,.25);box-shadow:0 12px 28px rgba(52,120,246,.055)}
+
+/* ---------- Research ---------- */
+.researchGrid{gap:14px}.researchItem,.researchCard{border-radius:15px;background:linear-gradient(145deg,rgba(255,255,255,.82),rgba(246,243,255,.58));border:1px solid rgba(119,87,255,.13)}
+.researchItem:hover,.researchCard:hover{border-color:rgba(119,87,255,.3);box-shadow:0 14px 30px rgba(119,87,255,.055)}
+
+/* ---------- Finance ---------- */
+.financeRows>div,.financeRow{border-radius:12px;background:rgba(255,255,255,.63);border:1px solid rgba(21,21,21,.1);padding:10px 11px}
+.financeRows>div:hover,.financeRow:hover{background:#fff}.financeRows .income,.financeRow.income{border-left:3px solid var(--adv-green)}.financeRows .expense,.financeRow.expense{border-left:3px solid var(--adv-red)}
+.healthGrid>div{border-radius:13px;background:rgba(255,255,255,.65);border:1px solid rgba(21,21,21,.1)}
+
+/* ---------- Memory Vault ---------- */
+.memoryHero{border-radius:22px;background:linear-gradient(125deg,rgba(255,255,255,.91),rgba(242,238,255,.7) 55%,rgba(255,240,232,.65));box-shadow:var(--adv-shadow)}
+.memoryHero h3{letter-spacing:-.04em}.memoryToolbar{border-radius:16px;padding:9px}.memoryCard{border-radius:16px;background:linear-gradient(145deg,rgba(255,255,255,.88),rgba(255,255,255,.62));border-color:rgba(21,21,21,.12);box-shadow:0 10px 24px rgba(50,36,30,.035)}
+.memoryCard:hover{transform:translateY(-2px);border-color:rgba(119,87,255,.26);box-shadow:0 17px 34px rgba(119,87,255,.07)}
+.memoryCard.pinned{background:linear-gradient(145deg,rgba(255,255,255,.94),rgba(245,239,255,.76));box-shadow:inset 3px 0 var(--adv-purple),0 14px 28px rgba(119,87,255,.055)}
+.memoryCard .chips span{color:#6447d1;background:rgba(119,87,255,.07)}
+
+/* ---------- Team ---------- */
+.teamHead{padding:3px 0}.teamHead .avatar{box-shadow:0 9px 20px rgba(255,102,149,.16)}
+
+/* ---------- Settings ---------- */
+.settingsList{gap:9px}.settingsList>div{border-radius:13px;background:rgba(255,255,255,.62);border:1px solid rgba(21,21,21,.1);padding:11px 12px}.settingsList>div:hover{background:#fff}
+.toggle{background:rgba(21,21,21,.1);box-shadow:inset 0 0 0 1px rgba(21,21,21,.06)}.toggle.on{background:linear-gradient(135deg,var(--adv-purple),#957cff);border-color:transparent}.toggle.on i{box-shadow:0 2px 5px rgba(0,0,0,.16)}
+.connectionNotice{border-radius:13px;background:linear-gradient(135deg,rgba(255,255,255,.72),rgba(255,246,225,.72));box-shadow:0 8px 18px rgba(52,38,29,.035)}
+.activityList>div{padding:9px 10px;border-radius:11px;background:rgba(255,255,255,.53);border:1px solid rgba(21,21,21,.075)}
+
+/* ---------- Modal / overlay ---------- */
+.modalBackdrop{background:rgba(28,22,19,.28);backdrop-filter:blur(12px) saturate(115%)}
+.modal{border-radius:20px;background:linear-gradient(145deg,rgba(255,252,247,.97),rgba(248,243,235,.96));border-color:rgba(21,21,21,.34);box-shadow:0 35px 100px rgba(30,23,20,.28)}
+.modalHead{padding:15px 16px;border-bottom:1px solid rgba(21,21,21,.1);background:rgba(255,252,247,.82)}
+.emptyState{border-radius:14px;min-height:120px;background:linear-gradient(145deg,rgba(255,255,255,.44),rgba(255,255,255,.22));border-color:rgba(21,21,21,.13)}
+
+/* ---------- Motion ---------- */
+.panel,.stat,.taskRow,.leadCard,.memoryCard,.memoryPreviewGrid>button,.settingsList>div,.financeRows>div{transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease,background .16s ease}
+@keyframes advancedIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.content>.pageTitle,.content>.heroCard,.content>.statsGrid,.content>.quickCapture,.content>.dashboardGrid,.content>.twoCol,.content>.threeCol,.content>.panel,.content>.kanban,.content>.memoryHero,.content>.memoryToolbar{animation:advancedIn .26s ease-out both}
+.content>*:nth-child(2){animation-delay:.02s}.content>*:nth-child(3){animation-delay:.04s}.content>*:nth-child(4){animation-delay:.06s}.content>*:nth-child(5){animation-delay:.08s}
+
+/* ---------- Responsive ---------- */
+@media(max-width:1180px){
+  .content{padding:23px 22px 46px}.sidebar{width:248px;flex-basis:248px}.statsGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.stage{width:240px;flex-basis:240px}
+}
+@media(max-width:800px){
+  .topbar{height:60px;padding:0 11px}.appBody{height:calc(100vh - 60px)}.sidebar{top:60px;width:min(86vw,320px);flex-basis:min(86vw,320px)}
+  .content{padding:17px 12px 38px}.pageTitle{padding-bottom:13px}.pageTitle h2{font-size:25px}.pageTitle p{font-size:10px}
+  .heroCard{padding:17px 16px;min-height:0}.heroCard:before{display:none}.scoreRing{width:82px;height:82px;flex-basis:82px;border-width:6px}
+  .taskLayout>.panel:first-child{position:static}.filterBar{width:100%;overflow:auto;flex-wrap:nowrap}.filterBar button{white-space:nowrap}
+  .panelHead{min-height:52px;padding:12px}.panelBody{padding:12px}.stage{width:82vw;flex-basis:82vw}.stageBody{min-height:210px}
+}
+@media(max-width:520px){
+  .content{padding-left:9px;padding-right:9px}.pageTitle h2{font-size:23px}.statsGrid{grid-template-columns:1fr 1fr;gap:8px}.stat{min-height:76px;padding:11px}.stat strong{font-size:19px}
+  .heroCard{gap:10px}.heroCard h3{font-size:18px}.scoreRing{width:72px;height:72px;flex-basis:72px}.scoreRing span{display:none}
+  .panel{border-radius:16px}.memoryCard,.leadCard{border-radius:13px}.topDate{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

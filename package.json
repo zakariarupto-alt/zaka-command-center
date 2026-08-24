@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build:assets": "vite build",
+    "build": "vite build && node scripts/make-standalone-preview.mjs && cp dist/memory-space-preview.html dist/index.html",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -2,7 +2,7 @@ name: Build Check
 
 on:
   push:
-    branches: [main, "preview/**"]
+    branches: [main, "preview/**", "rebuild/**"]
   pull_request:
     branches: [main]
 
@@ -14,6 +14,20 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
       - run: npm install
       - run: npm run build
+      - name: Build standalone browser preview
+        if: startsWith(github.head_ref || github.ref_name, 'rebuild/')
+        run: |
+          cp src/main.jsx /tmp/main.jsx
+          sed -i 's/BrowserRouter/HashRouter/g' src/main.jsx
+          npm run build
+          node scripts/make-standalone-preview.mjs
+          mv /tmp/main.jsx src/main.jsx
+      - name: Upload standalone preview
+        if: startsWith(github.head_ref || github.ref_name, 'rebuild/')
+        uses: actions/upload-artifact@v4
+        with:
+          name: memory-space-preview
+          path: dist/memory-space-preview.html
+          if-no-files-found: error
